@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    moodle_cal_dl:
+        container_name: moodle_cal_dl
+        build: .
+        restart: unless-stopped
+        volumes:
+            - ./out/:/app/out/
+        environment:
+            TZ: "Europe/Berlin"
+
+    web:
+        container_name: moodle_nginx
+        image: nginx
+        restart: unless-stopped
+        volumes:
+            - ./out:/usr/share/nginx/html:ro 
+        ports:
+            - 8888:80 
